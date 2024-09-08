@@ -7,6 +7,8 @@ import Webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 import renderer from "./renderer";
 import { buildDir, webpackDevServerPort } from "./vars";
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
 
 /**
  * API docs:
