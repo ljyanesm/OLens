@@ -25,13 +25,13 @@ runInAction(() => {
   registerLensCore(di, environment);
 
   registerFeature(di,
-      loggerFeature,
+    loggerFeature,
   );
 
   registerFeature(di,
-      applicationFeature,
-      applicationFeatureForElectronMain,
-      messagingFeatureForMain,
+    applicationFeature,
+    applicationFeatureForElectronMain,
+    messagingFeatureForMain,
   );
 
   try {
