@@ -21,7 +21,6 @@
     "skipLibCheck": true,
     "allowJs": false,
     "esModuleInterop": true,
-    "importsNotUsedAsValues": "error",
     "traceResolution": false,
     "resolveJsonModule": true,
     "useDefineForClassFields": true,

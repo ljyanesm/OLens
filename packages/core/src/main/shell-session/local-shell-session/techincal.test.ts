@@ -5,6 +5,7 @@
 
 import type { DiContainer } from "@ogre-tools/injectable";
 import type WebSocket from "ws";
+import type { IPty } from "node-pty";
 import directoryForTempInjectable from "../../../common/app-paths/directory-for-temp/directory-for-temp.injectable";
 import directoryForUserDataInjectable from "../../../common/app-paths/directory-for-user-data/directory-for-user-data.injectable";
 import { Cluster } from "../../../common/cluster/cluster";
@@ -22,7 +23,6 @@ import createKubectlInjectable from "../../kubectl/create-kubectl.injectable";
 import type { Kubectl } from "../../kubectl/kubectl";
 import lensProxyPortInjectable from "../../lens-proxy/lens-proxy-port.injectable";
 import type { OpenShellSession } from "../create-shell-session.injectable";
-import type { SpawnPty } from "../spawn-pty.injectable";
 import spawnPtyInjectable from "../spawn-pty.injectable";
 import openLocalShellSessionInjectable from "./open.injectable";
 
@@ -45,7 +45,7 @@ describe("technical unit tests for local shell sessions", () => {
 
   describe("when on windows", () => {
     let openLocalShellSession: OpenShellSession;
-    let spawnPtyMock: jest.MockedFunction<SpawnPty>;
+    let spawnPtyMock: jest.MockedFunction<(...args: any[]) => any>;
 
     beforeEach(() => {
       di.override(platformInjectable, () => "win32");
@@ -69,7 +69,7 @@ describe("technical unit tests for local shell sessions", () => {
       it("should pass through all environment variables to shell", async () => {
         process.env.MY_TEST_ENV_VAR = "true";
 
-        spawnPtyMock.mockImplementationOnce((file, args, options) => {
+        spawnPtyMock.mockImplementationOnce((file: string, args: string[], options: any) => {
           expect(options.env).toMatchObject({
             MY_TEST_ENV_VAR: "true",
           });
@@ -88,8 +88,8 @@ describe("technical unit tests for local shell sessions", () => {
             resume: jest.fn(),
             write: jest.fn(),
             on: jest.fn(),
-
-          };
+            clear: jest.fn(),
+          } as IPty;
         });
 
         const websocket = {
