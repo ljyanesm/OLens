@@ -302,7 +302,7 @@
     "@types/chart.js": "^2.9.36",
     "@types/color": "^3.0.3",
     "@types/crypto-js": "^4.2.2",
-    "@types/lodash": "^4.14.191",
+    "@types/lodash": "^4.17.9",
     "@types/node": "^16.18.25",
     "@types/proper-lockfile": "^4.1.2",
     "@types/react-dom": "^17.0.16",
